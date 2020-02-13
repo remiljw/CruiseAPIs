@@ -15,27 +15,24 @@ class ExcursionDetail(APIView):
     def get(self, request):
         excursion = Excursion.objects.all()
         data = ExcursionSerializer(excursion, many=True).data
-        if data.is_valid():
-            return Response(data, status=status.HTTP_200_OK)
-        else:
-            return Response(data, status=status.HTTP_404_NOT_FOUND)
+        return Response(data, status=status.HTTP_200_OK)
 
 class ExcursionList(APIView):
-    def get(self, request, pk):
-        excursion = get_object_or_404(Excursion, pk=pk)
+    permission_classes = (IsAuthenticated,)
+    def get(self, request, id):
+        excursion = get_object_or_404(Excursion, id=id)
         data = ExcursionSerializer(excursion).data
-        if data.is_valid:
-            return Response(data, status=status.HTTP_200_OK)
-        else:
-            return Response(data, status=status.HTTP_404_NOT_FOUND)
+        return Response(data, status=status.HTTP_200_OK)
+      
 
 
 
 class CreateExcursion(APIView):
+    permission_classes = (IsAuthenticated,)
     serializer_class = ExcursionSerializer
 
     def post(self, request):
-        data = {''
+        data = {
         
         }
         serializer = ExcursionSerializer(data=data)
@@ -44,9 +41,11 @@ class CreateExcursion(APIView):
         else:
             return Response(serializer.errors, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
-# class EditExcursion(APIView):
-#     serializer_class = ExcursionSerializer
+class EditExcursion(APIView):
+    serializer_class = ExcursionSerializer
+    permission_classes = (IsAuthenticated,)
 
-#     def put(self, request, pk)
+    # def put(self, request, id):
+        
 
 
