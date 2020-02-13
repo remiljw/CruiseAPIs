@@ -4,7 +4,13 @@ from django_mysql.models import ListCharField #This is a custom field that requi
 
 # Create your models here.
 class Excursion(models.Model):
-  id = models.IntegerField(primary_key=True,unique=True)
+  Active = 'active'
+  Inactive = 'inactive'
+  Excursion_status = [
+    (Active, 'active'),
+    (Inactive, 'inactive'),
+  ]
+  id = models.BigIntegerField(primary_key=True,unique=True)
   name = models.CharField(max_length=200)
   detailPageName = models.CharField(max_length=400)
   portID = models.CharField(max_length=10)
@@ -17,7 +23,7 @@ class Excursion(models.Model):
   priceLevel = models.IntegerField(null=True)
   currency = models.CharField(max_length=10)
   mealInfo = models.CharField(max_length=100,blank=True)
-  status = models.CharField(max_length=10,default='active')
+  status = models.CharField(max_length=10, choices = Excursion_status,default=Active)
   shortDescription = models.CharField(max_length=200,blank=True)
   longDescription = models.TextField()
   externalContent = models.BooleanField(default=False)
