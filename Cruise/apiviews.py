@@ -41,13 +41,23 @@ class CreateExcursion(APIView):
 class EditExcursion(APIView):
     serializer_class = ExcursionSerializer
     permission_classes = (IsAuthenticated,)
+    def get(self, request, id):
+        excursion = get_object_or_404(Excursion, id=id)
+        data = ExcursionSerializer(excursion).data
+        return Response(data, status=status.HTTP_200_OK)
 
-    # def put(self, request, id):
+    def put(self, request):
+        serializer = ExcursionSerializer(data=request.data)
+        if serializer.is_valid():
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        else:
+            return Response(serializer.errors, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+ 
         
 
 
 
-    # def put(self, request, id):
+
         
 
 
