@@ -43,7 +43,6 @@ INSTALLED_APPS = [
     'rest_framework_simplejwt',
     'django_mysql',
     'corsheaders',
-    'rest_framework_swagger',
 ]
 
 # Default permission that allows anyone to access our API. This is left this way for development purpose it should be changed before it gets to production.
@@ -88,7 +87,7 @@ WSGI_APPLICATION = 'CruiseAPI.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql', 
-        'NAME': 'cruise',
+        'NAME': 'cruise', 
         'USER': 'root',
         'PASSWORD': '',
         'HOST':  'localhost',
