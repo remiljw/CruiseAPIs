@@ -43,7 +43,12 @@ INSTALLED_APPS = [
     'rest_framework_simplejwt',
     'django_mysql',
     'corsheaders',
+    'rest_framework_swagger',
 ]
+
+# Default permission that allows anyone to access our API. This is left this way for development purpose it should be changed before it gets to production.
+CORS_ORIGIN_ALLOW_ALL = True
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -83,11 +88,11 @@ WSGI_APPLICATION = 'CruiseAPI.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql', 
-        'NAME': config('DATABASE_NAME','cruise'),
-        'USER': config('DATABASE_USER', 'root'),
-        'PASSWORD':  config('DATABASE_PASSWORD', ''),
-        'HOST': config('DATABASE_HOST', 'localhost'),
-        'PORT':  config('DATABASE_PORT', '3308'),
+        'NAME': 'cruise',
+        'USER': 'root',
+        'PASSWORD': '',
+        'HOST':  'localhost',
+        'PORT':   '3308',
     },
         'TEST': {
             'CHARSET': 'utf8mb4',
@@ -96,15 +101,12 @@ DATABASES = {
 }
 
 REST_FRAMEWORK = {
-    'DEFAULT_PERMISSION_CLASSES': (
-         'rest_framework_simplejwt.authentication.JWTAuthentication',
-    )
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+         'rest_framework_simplejwt.authentication.JWTAuthentication',),
+    'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema'
 }
 
-# JWT_AUTH = {
-#     'JWT_RESPONSE_PAYLOAD_HANDLER': 'remiljscrumy.views.jwt_response_payload_handler',
-#     'JWT_EXPIRATION_DELTA': datetime.timedelta(hours=24),
-#     }
+
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
