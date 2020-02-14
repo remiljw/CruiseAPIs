@@ -26,6 +26,8 @@ SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'b!+zny1=nnon5_js#h&xzue8^6!rqy
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = bool(os.environ.get('DJANGO_DEBUG', True))
 
+#Default permission deploy our code on any platform
+#Can be changed if needed
 ALLOWED_HOSTS = ['*']
 
 
@@ -45,7 +47,8 @@ INSTALLED_APPS = [
     'corsheaders',
 ]
 
-# Default permission that allows anyone to access our API. This is left this way for development purpose it should be changed before it gets to production.
+# Default permission that allows anyone to access our API. 
+# This is left this way for development purpose it should be changed before it gets to production.
 CORS_ORIGIN_ALLOW_ALL = True
 
 
@@ -87,11 +90,11 @@ WSGI_APPLICATION = 'CruiseAPI.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql', 
-        'NAME': 'cruise', 
-        'USER': 'root',
-        'PASSWORD': '',
-        'HOST':  'localhost',
-        'PORT':   '3308',
+        'NAME': 'cruise', # Change to your DB name
+        'USER': 'root', # Changer to your DB username
+        'PASSWORD': '', # Input your DB password if any
+        'HOST':  'localhost', # name of your DB hoat or url
+        'PORT':   '3308', # port
     },
         'TEST': {
             'CHARSET': 'utf8mb4',
