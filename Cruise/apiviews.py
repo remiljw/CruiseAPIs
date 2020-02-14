@@ -9,7 +9,7 @@ class ExcursionLists(generics.ListAPIView):
     permission_classes = [IsAuthenticated]
     queryset = Excursion.objects.raw('SELECT * FROM cruise_excursion')
     serializer_class = ExcursionSerializer
-    def detail(self, request):
+    def lists(self, request):
         queryset = self.get_queryset
         serializer = ExcursionSerializer(queryset, many=True)
         return Response(serializer.data)
@@ -18,7 +18,7 @@ class ExcursionLists(generics.ListAPIView):
 
 class SingleExcursion(generics.ListAPIView):
     permission_classes = [IsAuthenticated]
-    def get(self, request, id):
+    def single(self, request, id):
         excursion = get_object_or_404(Excursion, id=id)
         data = ExcursionSerializer(excursion).data
         return Response(data)
@@ -27,7 +27,14 @@ class SingleExcursion(generics.ListAPIView):
 class CreateExcursion(generics.CreateAPIView):
     permission_classes = [IsAuthenticated]
     serializer_class = ExcursionSerializer
+    def post(self, request):
+        serializer = ExcursionSerializer(data=request.data)
+        if serializer.is_valid():
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        else:
+            return Response(serializer.errors, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
+        
 class EditExcursion(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = [IsAuthenticated]
     queryset = Excursion.objects.all()
