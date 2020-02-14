@@ -12,9 +12,9 @@ This is a simulation of a Cruise Excursion API with CRUD options, optimized usin
  - run `python manage.py runserver`
  - Test your endpoints.
     - Endpoints can be tested via the CLI or an API testing tool e.g POSTMAN
-    - Get your access tokens via the `.../api/token/` url
+    - Get your access tokens via the `http://127.0.0.1:8000//api/token/` url
     - Add access tokens to request headers 
     - List of url endpoints can be found in the Cruise/urls.py and CruiseAPI/urls.py.
-    - Testing can also be done via the API doc-page[ core api] (`../api/doc/`)
+    - Testing can also be done via the API doc-page[ core api] (`http://127.0.0.1:8000//api/doc/`)
 
  

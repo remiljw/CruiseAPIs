@@ -7,7 +7,7 @@ from .serializers import ExcursionSerializer
 
 class ExcursionLists(generics.ListAPIView):
     permission_classes = [IsAuthenticated]
-    queryset = Excursion.objects.raw('SELECT * FROM cruise_excursion')
+    queryset = Excursion.objects.raw('SELECT * FROM cruise_excursion WHERE ')
     serializer_class = ExcursionSerializer
     def lists(self, request):
         queryset = self.get_queryset
