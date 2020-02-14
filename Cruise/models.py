@@ -14,7 +14,7 @@ class Excursion(models.Model):
   name = models.CharField(max_length=200)
   detailPageName = models.CharField(max_length=400)
   portID = models.CharField(max_length=10)
-  types = models.CharField(max_length=10)
+  type = models.CharField(max_length=10)
   topology = ListCharField(base_field= CharField(max_length=10),size=6,max_length=(6*11)) # * 10 inputs plus comma. This is a custom field that requires mysql
   activityLevel = models.CharField(max_length=20)
   collectionType = models.CharField(max_length=30)
