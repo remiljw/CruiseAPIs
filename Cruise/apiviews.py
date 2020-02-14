@@ -11,7 +11,7 @@ from .models import Excursion
 from .serializers import ExcursionSerializer
 
 class ExcursionDetail(APIView):
-    permission_classes = (IsAuthenticated)
+    permission_classes = (IsAuthenticated,)
     def get(self, request):
         excursion = Excursion.objects.all()
         data = ExcursionSerializer(excursion, many=True).data
@@ -46,8 +46,9 @@ class EditExcursion(APIView):
         data = ExcursionSerializer(excursion).data
         return Response(data, status=status.HTTP_200_OK)
 
-    def put(self, request):
-        serializer = ExcursionSerializer(data=request.data)
+    def put(self, request, id):
+        excursion = get_object_or_404(Excursion, id=id)
+        serializer = ExcursionSerializer(data=excursion.__dict__)
         if serializer.is_valid():
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         else:
