@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
+from decouple import config
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -20,10 +21,10 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'b!+zny1=nnon5_js#h&xzue8^6!rqy%cw8*qehf@ec4ni8s60v'
+SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'b!+zny1=nnon5_js#h&xzue8^6!rqy%cw8*qehf@ec4ni8s60v')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = bool(os.environ.get('DJANGO_DEBUG', True))
 
 ALLOWED_HOSTS = ['*']
 
@@ -82,11 +83,11 @@ WSGI_APPLICATION = 'CruiseAPI.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql', 
-        'NAME': 'cruise',
-        'USER': 'root',
-        'PASSWORD': '',
-        'HOST': 'localhost',   #
-        'PORT': '3308',
+        'NAME': config('DATABASE_NAME','cruise'),
+        'USER': config('DATABASE_USER', 'root'),
+        'PASSWORD':  config('DATABASE_PASSWORD', ''),
+        'HOST': config('DATABASE_HOST', 'localhost'),
+        'PORT':  config('DATABASE_PORT', '3308'),
     },
         'TEST': {
             'CHARSET': 'utf8mb4',
