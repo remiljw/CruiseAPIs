@@ -16,12 +16,11 @@ class ExcursionLists(generics.ListAPIView):
 
   
 
-class SingleExcursion(generics.ListAPIView):
+class SingleExcursion(generics.RetrieveAPIView):
     permission_classes = [IsAuthenticated]
-    def single(self, request, id):
-        excursion = get_object_or_404(Excursion, id=id)
-        data = ExcursionSerializer(excursion).data
-        return Response(data)
+    queryset = Excursion.objects.all()
+    serializer_class = ExcursionSerializer
+
       
 
 class CreateExcursion(generics.CreateAPIView):
