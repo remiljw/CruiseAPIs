@@ -1,0 +1,1 @@
+web: gunicorn CruiseAPI.wsgi --log-file -
