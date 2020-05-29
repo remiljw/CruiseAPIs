@@ -1,8 +1,4 @@
-<<<<<<< HEAD
 Django==3.0.3
-=======
-Django==2.2.10
->>>>>>> f857adabb7b57ee20b96da261fd56a8fc207e09a
 django-mysql==3.3.0
 djangorestframework==3.11.0
 djangorestframework-simplejwt==4.4.0
