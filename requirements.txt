@@ -1,4 +1,4 @@
-Django==2.2
+Django==2.2.10
 django-mysql==3.3.0
 djangorestframework==3.11.0
 djangorestframework-simplejwt==4.4.0
