@@ -28,7 +28,7 @@ DEBUG = bool(os.environ.get('DJANGO_DEBUG', True))
 
 #Default permission deploy our code on any platform
 #Can be changed if needed
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['cruiseapi.herokuapp.com']
 
 
 # Application definition
@@ -53,6 +53,7 @@ CORS_ORIGIN_ALLOW_ALL = True
 
 
 MIDDLEWARE = [
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware', 
