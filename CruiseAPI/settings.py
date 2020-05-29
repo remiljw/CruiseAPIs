@@ -22,14 +22,14 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-# SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'b!+zny1=nnon5_js#h&xzue8^6!rqy%cw8*qehf@ec4ni8s60v')
+SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'b!+zny1=nnon5_js#h&xzue8^6!rqy%cw8*qehf@ec4ni8s60v')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = bool(os.environ.get('DJANGO_DEBUG', True))
 
 #Default permission deploy our code on any platform
 #Can be changed if needed
-ALLOWED_HOSTS = ['cruiseapi.herokuapp.com']
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -55,7 +55,6 @@ CORS_ORIGIN_ALLOW_ALL = True
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware', 
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -89,27 +88,27 @@ WSGI_APPLICATION = 'CruiseAPI.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.mysql', 
-#         'NAME': 'cruise', # Change to your DB name
-#         'USER': 'root', # Changer to your DB username
-#         'PASSWORD': '', # Input your DB password if any
-#         'HOST':  'localhost', # name of your DB hoat or url
-#         'PORT':   '3308', # port
-#     },
-#         'TEST': {
-#             'CHARSET': 'utf8mb4',
-#             'COLLATION': 'utf8mb4_unicode_ci',
-#         }
-# }
-SECRET_KEY = config('SECRET_KEY')
-DEBUG = config('DEBUG', default=False, cast=bool)
 DATABASES = {
-    'default': dj_database_url.config(
-        default=config('DATABASE_URL')
-    )
+    'default': {
+        'ENGINE': 'django.db.backends.mysql', 
+        'NAME': 'cruise', # Change to your DB name
+        'USER': 'root', # Changer to your DB username
+        'PASSWORD': '', # Input your DB password if any
+        'HOST':  'localhost', # name of your DB hoat or url
+        'PORT':   '3308', # port
+    },
+        'TEST': {
+            'CHARSET': 'utf8mb4',
+            'COLLATION': 'utf8mb4_unicode_ci',
+        }
 }
+# SECRET_KEY = config('SECRET_KEY')
+# DEBUG = config('DEBUG', default=False, cast=bool)
+# DATABASES = {
+#     'default': dj_database_url.config(
+#         default=config('DATABASE_URL')
+#     )
+# }
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (

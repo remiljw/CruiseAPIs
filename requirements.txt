@@ -1,13 +1,13 @@
-Django==2.2
+Django==3.0.3
 django-mysql==3.3.0
 djangorestframework==3.11.0
 djangorestframework-simplejwt==4.4.0
 mysqlclient==1.4.6
-django-cors-headers==3.2.1
+# django-cors-headers==3.2.1
 python-decouple==3.3
 coreapi==2.3.3
 httpie==2.0.0
-gunicorn==19.6.0
-whitenoise==3.3.1
-psycopg2==2.8.5
-dj-database-url==0.5.0
+# gunicorn==19.6.0
+# whitenoise==3.3.1
+# psycopg2==2.8.5
+# dj-database-url==0.5.0
