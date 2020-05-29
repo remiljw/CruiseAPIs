@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
+import dj_database_url 
 from decouple import config
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -21,7 +22,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'b!+zny1=nnon5_js#h&xzue8^6!rqy%cw8*qehf@ec4ni8s60v')
+# SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'b!+zny1=nnon5_js#h&xzue8^6!rqy%cw8*qehf@ec4ni8s60v')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = bool(os.environ.get('DJANGO_DEBUG', True))
@@ -88,19 +89,26 @@ WSGI_APPLICATION = 'CruiseAPI.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql', 
+#         'NAME': 'cruise', # Change to your DB name
+#         'USER': 'root', # Changer to your DB username
+#         'PASSWORD': '', # Input your DB password if any
+#         'HOST':  'localhost', # name of your DB hoat or url
+#         'PORT':   '3308', # port
+#     },
+#         'TEST': {
+#             'CHARSET': 'utf8mb4',
+#             'COLLATION': 'utf8mb4_unicode_ci',
+#         }
+# }
+SECRET_KEY = config('SECRET_KEY')
+DEBUG = config('DEBUG', default=False, cast=bool)
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql', 
-        'NAME': 'cruise', # Change to your DB name
-        'USER': 'root', # Changer to your DB username
-        'PASSWORD': '', # Input your DB password if any
-        'HOST':  'localhost', # name of your DB hoat or url
-        'PORT':   '3308', # port
-    },
-        'TEST': {
-            'CHARSET': 'utf8mb4',
-            'COLLATION': 'utf8mb4_unicode_ci',
-        }
+    'default': dj_database_url.config(
+        default=config('DATABASE_URL')
+    )
 }
 
 REST_FRAMEWORK = {
@@ -148,3 +156,5 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
+# prod_db  =  dj_database_url.config(conn_max_age=500)
+# DATABASES['default'].update(prod_db)
